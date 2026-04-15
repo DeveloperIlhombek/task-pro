@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vazifalar</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Momo+Signature&family=Syne:wght@400..800&display=swap');
+
+		.momo-signature-regular {
+			font-family: "Momo Signature", cursive;
+			font-weight: 400;
+		}
+
+		.syne {
+			font-family: "Syne", sans-serif;
+			font-weight: 700;
+		}
+	</style>
+</head>
+
+<body class="bg-slate-700 min-h-screen">
+
+	<!-- Header -->
+	<header class="h-24 w-full bg-slate-800">
+		<div class="container flex items-center justify-between p-8">
+			<div class="momo-signature-regular bg-gradient-to-r from-pink-500 to-violet-500
+                  bg-clip-text text-5xl font-extrabold text-transparent">
+				TaskFlow
+			</div>
+			<div class="text-white flex items-center gap-4">
+				<span>Salom, <strong id="nav-username">...</strong></span>
+				<button id="btn-logout" class="border-2 border-gray-500 px-3 py-1 rounded-xl
+                 hover:border-red-500 hover:text-red-400 transition-colors">
+					Chiqish
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<!-- Asosiy qism -->
+	<section class="pb-16">
+		<h1 class="syne text-4xl font-extrabold ml-24 pt-12 text-white">Vazifalarim</h1>
+		<p id="date-line" class="text-xl font-thin ml-24 pt-2 text-white"></p>
+
+		<!-- Statistika kartalar -->
+		<div class="grid grid-cols-3 gap-4 px-24 mt-4">
+			<div class="w-full h-32 bg-slate-800 rounded-xl flex items-center justify-center flex-col gap-2">
+				<span class="syne text-3xl text-blue-400" id="stat-total">0</span>
+				<span class="text-white">Jami</span>
+			</div>
+			<div class="w-full h-32 bg-slate-800 rounded-xl flex items-center justify-center flex-col gap-2">
+				<span class="syne text-3xl text-green-400" id="stat-done">0</span>
+				<span class="text-white">Bajarildi</span>
+			</div>
+			<div class="w-full h-32 bg-slate-800 rounded-xl flex items-center justify-center flex-col gap-2">
+				<span class="syne text-3xl text-yellow-400" id="stat-pending">0</span>
+				<span class="text-white">Kutilmoqda</span>
+			</div>
+		</div>
+
+		<!-- Yangi task qo'shish -->
+		<div
+			class="mx-24 mt-4 h-36 bg-slate-800 rounded-xl flex items-start justify-center flex-col pl-12 text-white gap-8">
+			<h2>+ Yangi vazifa</h2>
+			<div class="grid grid-cols-6 gap-10 pr-12 w-full">
+				<input id="new-title" type="text" class="col-span-2 bg-transparent px-2 py-3 border-2 border-purple-500 rounded-xl
+                 focus:outline-none focus:border-pink-500" placeholder="Vazifa nomi">
+				<input id="new-desc" type="text" class="col-span-3 bg-transparent px-2 py-3 border-2 border-purple-500 rounded-xl
+                 focus:outline-none focus:border-pink-500" placeholder="Vazifa ta'rifi">
+				<button id="btn-add" class="col-span-1 bg-gradient-to-r from-pink-500 to-violet-500 rounded-2xl
+                 font-semibold hover:opacity-90 transition-opacity">
+					Qo'shish
+				</button>
+			</div>
+		</div>
+
+		<!-- Task ro'yxati — JS tomonidan to'ldiriladi -->
+		<div id="task-list" class="mx-24 mt-6 flex flex-col gap-3"></div>
+	</section>
+
+	<!-- Tahrirlash modali -->
+	<div id="modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden">
+		<div class="bg-slate-800 border border-slate-600 rounded-2xl p-8 w-full max-w-md mx-4">
+			<h3 class="syne text-xl text-white font-bold mb-6">Vazifani tahrirlash</h3>
+
+			<label class="text-xs text-gray-400 uppercase tracking-widest mb-1 block">Sarlavha</label>
+			<input id="edit-title" type="text" class="w-full bg-slate-700 border-2 border-slate-500 focus:border-violet-500
+               rounded-xl px-4 py-3 text-white outline-none mb-4">
+
+			<label class="text-xs text-gray-400 uppercase tracking-widest mb-1 block">Ta'rif</label>
+			<textarea id="edit-desc" rows="3" class="w-full bg-slate-700 border-2 border-slate-500 focus:border-violet-500
+               rounded-xl px-4 py-3 text-white outline-none resize-none mb-6"></textarea>
+
+			<div class="flex gap-3">
+				<button id="btn-save" class="flex-1 bg-gradient-to-r from-pink-500 to-violet-500 text-white
+                 py-3 rounded-xl font-semibold hover:opacity-90">
+					Saqlash
+				</button>
+				<button id="btn-cancel" class="px-6 py-3 bg-slate-700 border border-slate-500 text-gray-300
+                 rounded-xl hover:border-red-400 hover:text-red-400 transition-all">
+					Bekor
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!--
+    tsc buyrug'i src/task.ts ni dist/task.js ga compile qiladi
+    Brauzer faqat .js faylni o'qiydi
+  -->
+	<script src="./dist/task.js"></script>
+
+</body>
+
+</html>
